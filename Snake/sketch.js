@@ -22,17 +22,19 @@ drawBg = () => {
 draw = () => {
   if (new Date().getTime() - currTime < Math.max(101 - snakeGame.curr.size, 30))
     return;
-  if (snakeGame.gameOver) {
-    text("Game Over", 280, 380);
-    text("Press R to restart", 280, 420);
-    return;
-  }
   currTime = new Date().getTime();
   select("#score").html(snakeGame.curr.size);
   drawBg();
   snakeGame.update();
   snakeGame.draw();
+  if (snakeGame.gameOver) {
+    fill(255);
+    text("Game Over", 280, 380);
+    text("Press R to restart", 280, 420);
+    return;
+  }
   if (!snakeGame.gameStart) {
+    fill(255);
     text("Press S to start", 280, 380);
     return;
   }
