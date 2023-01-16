@@ -2,7 +2,7 @@ class Population {
   dots;
   fitnessSum;
   gen = 0;
-  minStep = 1000;
+  minStep = stepCount;
   bestIndex = 0;
 
   constructor(size) {
@@ -51,11 +51,17 @@ class Population {
     let newDots = Array(this.dots.length);
     newDots[0] = this.dots[this.bestIndex].createChild();
     newDots[0].lastBest = true;
-    let bestFitness = this.dots[this.bestIndex].fitness;
     for (let i = 1; i < newDots.length; i++) {
-      let parent = this.selectParent();
-      newDots[i] = parent.createChild();
-      newDots[i].brain.mutate(0.01);
+      let parent1 = this.selectParent();
+      let parent2 = this.selectParent();
+      let child = parent1.createChild();
+      if (parent1 == parent2) {
+        child = parent1.createChild();
+      } else {
+        child = parent1.cross(parent2);
+      }
+      child.brain.mutate(0.01);
+      newDots[i] = child;
     }
     this.dots = newDots;
     this.gen++;

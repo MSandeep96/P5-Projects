@@ -34,4 +34,13 @@ class Brain {
     newBrain.directions = [...this.directions];
     return newBrain;
   }
+
+  cross(otherBrain) {
+    let newBrain = new Brain();
+    for (let i = 0; i < this.directions.length; i++) {
+      newBrain.directions[i] =
+        random() > 0.5 ? otherBrain.directions[i] : this.directions[i];
+    }
+    return newBrain;
+  }
 }

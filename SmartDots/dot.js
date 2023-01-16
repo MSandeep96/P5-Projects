@@ -13,7 +13,7 @@ class Dot {
     this.pos = createVector(width / 2, height - 10);
     this.vel = createVector(0, 0);
     this.acc = createVector(0, 0);
-    this.brain = new Brain(1000);
+    this.brain = new Brain(stepCount);
   }
 
   show() {
@@ -71,6 +71,12 @@ class Dot {
   createChild() {
     let babe = new Dot();
     babe.brain = this.brain.clone();
+    return babe;
+  }
+
+  cross(otherDot) {
+    let babe = new Dot();
+    babe.brain = this.brain.cross(otherDot.brain);
     return babe;
   }
 }

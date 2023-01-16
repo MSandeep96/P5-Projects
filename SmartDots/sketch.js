@@ -1,4 +1,5 @@
 let pop, goal, obs;
+let stepCount = 500;
 
 function setup() {
   frameRate(240);
@@ -17,6 +18,7 @@ function draw() {
   fill(0, 0, 255);
   obs.show();
   if (pop.allDotsDead()) {
+    obs.reset();
     pop.calcFitness();
     pop.naturalSelection();
   } else {
